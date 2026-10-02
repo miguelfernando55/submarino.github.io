@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projeto Submarino</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #03111f;
+            color: white;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 17, 31, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4dd9ff;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #4dd9ff;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+
+            background:
+                radial-gradient(circle at center, #0b4260 0%, #03111f 65%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(77, 217, 255, 0.15);
+            border-radius: 50%;
+            animation: pulse 5s infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .submarine {
+            font-size: 8rem;
+            margin-bottom: 20px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 20px;
+            color: #4dd9ff;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #c5dce8;
+            margin-bottom: 35px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #4dd9ff;
+            color: #03111f;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(77, 217, 255, 0.3);
+        }
+
+        /* SECÇÕES */
+        section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #4dd9ff;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #9fb6c4;
+        }
+
+        /* SOBRE */
+        .about {
+            background: #061a2b;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #c5dce8;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .submarine-card {
+            background: linear-gradient(145deg, #0a3047, #041725);
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(77, 217, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .submarine-card span {
+            font-size: 6rem;
+        }
+
+        /* OBJETIVOS */
+        .objectives {
+            background: #03111f;
+        }
+
+        .cards {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            padding: 35px 25px;
+            background: #071d2d;
+            border: 1px solid #123c52;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #4dd9ff;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: #4dd9ff;
+        }
+
+        .card p {
+            color: #a9c0cc;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 30px;
+            text-align: center;
+            background: #020b13;
+            color: #7893a2;
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+
+            .submarine {
+                font-size: 5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVEGAÇÃO -->
+    <nav>
+        <div class="logo">⚓ SUBMARINO</div>
+
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#projeto">Projeto</a></li>
+            <li><a href="#objetivos">Objetivos</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- INTRODUÇÃO -->
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <div class="submarine">🚢</div>
+
+            <h1>Explorar o Desconhecido</h1>
+
+            <p>
+                Bem-vindo ao meu projeto sobre submarinos.
+                Nesta página iremos explorar a tecnologia, o funcionamento
+                e a importância destas incríveis máquinas capazes de
+                viajar pelas profundezas dos oceanos.
+            </p>
+
+            <a href="#projeto" class="button">
+                Descobrir o projeto ↓
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOBRE O PROJETO -->
+    <section class="about" id="projeto">
+
+        <div class="section-title">
+            <h2>Sobre o Projeto</h2>
+            <p>Uma viagem pelas profundezas do oceano</p>
+        </div>
+
+        <div class="about-content">
+
+            <div class="about-text">
+
+                <p>
+                    Os submarinos são veículos projetados para navegar
+                    debaixo de água, permitindo ao ser humano explorar
+                    ambientes que seriam impossíveis de alcançar à
+                    superfície.
+                </p>
+
+                <p>
+                    Neste projeto serão apresentados os principais
+                    componentes de um submarino, o seu funcionamento,
+                    os sistemas utilizados e alguns dos desafios
+                    associados à exploração submarina.
+                </p>
+
+                <p>
+                    O objetivo é compreender como estas máquinas
+                    conseguem controlar a sua profundidade, navegar
+                    debaixo de água e suportar a enorme pressão existente
+                    nas profundezas do oceano.
+                </p>
+
+            </div>
+
+            <div class="submarine-card">
+                <span>🚢</span>
+                <h3>Missão Submarina</h3>
+                <p>
+                    Conhecer, explorar e compreender o mundo
+                    existente abaixo da superfície.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- OBJETIVOS -->
+    <section class="objectives" id="objetivos">
+
+        <div class="section-title">
+            <h2>Objetivos</h2>
+            <p>O que vamos descobrir neste projeto?</p>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="card-icon">⚙️</div>
+                <h3>Funcionamento</h3>
+                <p>
+                    Compreender como um submarino funciona e como
+                    consegue controlar a sua profundidade e movimento.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌊</div>
+                <h3>Exploração</h3>
+                <p>
+                    Conhecer a importância dos submarinos na exploração
+                    e investigação dos oceanos.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔬</div>
+                <h3>Tecnologia</h3>
+                <p>
+                    Explorar as principais tecnologias utilizadas
+                    nos submarinos modernos.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>© 2026 — Projeto Submarino</p>
+        <p>Uma viagem pelas profundezas do conhecimento 🌊</p>
+    </footer>
+
+</body>
+</html>
